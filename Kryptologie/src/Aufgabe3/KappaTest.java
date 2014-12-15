@@ -1,11 +1,7 @@
 package Aufgabe3;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-
-import Aufgabe2.Vigenere;
-import Input.Text;
 
 public class KappaTest {
 	

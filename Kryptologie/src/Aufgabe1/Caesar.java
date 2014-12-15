@@ -3,7 +3,7 @@ package Aufgabe1;
 import java.util.HashMap;
 import Input.Text;
 
-public class Save {
+public class Caesar {
 
 	private Text text = new Text();
 	char[] alphabet = text.getAlphabet();
