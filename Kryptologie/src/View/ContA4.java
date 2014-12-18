@@ -17,11 +17,16 @@ public class ContA4 {
 	JLabel[] encodedAlphabet = a4.getEncodedAlphabet();
 	JLabel[] encodedPercentage = a4.getEncodedPercentage();
 	String text = new Text().getTextFromFile("geheim2.txt");
-	PriorityQueue<StatElement> temp = b.wordCount(text);
-	StatElement[] german = new StatElement[26];
-	StatElement[] encoded = new StatElement[26];
+	StatElement[] german = BootCamp.german;
+	StatElement[] encoded = b.wordCount(text);
 
 	ContA4() {
+		for(int i =0;i<26;i++){
+			//System.out.println(german[i]);
+			System.out.println(encoded[i]);
+		}
+	
+		System.out.println("DONE");
 		setText();
 		setListener();
 	}
@@ -48,8 +53,7 @@ public class ContA4 {
 	public void setText() {
 		for (int i = 0; i < encoded.length; i++) {
 
-			german[i] = (StatElement) BootCamp.german.remove();
-			encoded[i] = (StatElement) temp.remove();
+
 		}
 		for (int i = 0; i < 26; i++) {
 			alphabet[i].setText(String.format("%c",
