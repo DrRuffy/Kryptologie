@@ -36,16 +36,9 @@ public class Luncher extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Luncher frame = new Luncher();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+		Luncher frame = new Luncher();
+
 	}
 
 	/**
@@ -67,11 +60,11 @@ public class Luncher extends JFrame {
 
 		this.setSize(width, height);
 		this.setLocationRelativeTo(null);
-		addButton(btnAufgabe1,new Aufgabe1());
-		addButton(btnAufgabe2,new Aufgabe2());
-		addButton(btnAufgabe3,new Aufgabe3());
-		addButton(btnAufgabe4,new Aufgabe4());
-		
+		addButton(btnAufgabe1);
+		addButton(btnAufgabe2);
+		addButton(btnAufgabe3);
+		addButton(btnAufgabe4);
+
 		btnAufgabe1.setText("Zur Aufgabe 1");
 		btnAufgabe2.setText("Zur Aufgabe 2");
 		btnAufgabe3.setText("Zur Aufgabe 3");
@@ -116,7 +109,7 @@ public class Luncher extends JFrame {
 
 	}
 
-	public void addButton(JButton button,final JFrame frame) {
+	public void addButton(JButton button) {
 
 		button.setBorderPainted(false);
 		button.setBackground(Color.GRAY);
@@ -124,8 +117,22 @@ public class Luncher extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(true);
-				
+				System.out.println(((JButton) e.getSource()).getText());
+				switch (((JButton) e.getSource()).getText()) {
+				case "Zur Aufgabe 1":
+					new ContA1();
+					break;
+				case "Zur Aufgabe 2":
+					new ContA2();
+					break;
+				case "Zur Aufgabe 3":
+					new ContA3();
+					break;
+				case "Zur Aufgabe 4":
+					new ContA4();
+					break;
+				}
+
 			}
 		});
 		this.getContentPane().add(button);

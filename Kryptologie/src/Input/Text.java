@@ -74,13 +74,16 @@ public class Text {
 	 * @return
 	 * @throws IOException 
 	 */
-	public String getTextFromFile(String filename) throws IOException {
+	public String getTextFromFile(String filename) {
 		String text="";
 		String temp;
+		try{
 		 FileReader fr = new FileReader(filename);
 		    BufferedReader br = new BufferedReader(fr);
 		    while((temp=br.readLine())!=null){
 		    	text+=temp;
+		    }}catch(IOException i){
+		    	System.err.println("FILE \" "+filename+"\" NOT FOUND");
 		    }
 		return text;
 	}

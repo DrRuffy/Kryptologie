@@ -8,6 +8,7 @@ import Aufgabe1.Caesar;
 import Aufgabe2.Vigenere;
 import Aufgabe3.KappaTest;
 import Aufgabe4.BootCamp;
+import Aufgabe4.StatElement;
 import Input.Text;
 
 public class Test {
@@ -16,12 +17,12 @@ public class Test {
 		KappaTest kappa = new KappaTest();
 		Vigenere v = new Vigenere();
 		Text t = new Text();
+		BootCamp bo = new BootCamp();
 		
+		for (StatElement s : BootCamp.german){
+			System.out.println(s.letter+": "+s.percentage);
+		}
 		
-		String geheim1 = t.getTextFromFile("geheim1.txt");
-		System.out.println(v.entsch(geheim1.toCharArray(),kappa.getKeyWord(geheim1)));
-		
-		String geheim2 = t.getTextFromFile("geheim2.txt");
 		
 		
 	}
