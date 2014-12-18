@@ -89,7 +89,8 @@ public class BootCamp {
 		double[] statistic = new double[26];
 		int anz = 0;
 		for (char c : encodedText.toCharArray()) {
-			int tmp = (int) c - 65;
+			int tmp = ((int) c) - 65;
+			
 			statistic[tmp]++;
 			anz++;
 		}
@@ -101,10 +102,12 @@ public class BootCamp {
 		StatElement[] tempArray = new StatElement[toSort.length];
 		PriorityQueue<StatElement> temp = new PriorityQueue<StatElement>(c);
 		for (int i = 0; i < toSort.length; i++) {
-			temp.add(new StatElement((char) (i + 65), new Double(toSort[i]
-					/ anz * 100)));
+			StatElement se = new StatElement((char) (i + 65), toSort[i]
+					/ anz * 100);
+			System.out.println(se);
+			temp.add(se);
 		}
-		for (int i = 0; i < temp.size(); i++) {
+		for (int i = 0; i < tempArray.length; i++) { //
 			tempArray[i] = temp.remove();
 		}
 		return tempArray;
