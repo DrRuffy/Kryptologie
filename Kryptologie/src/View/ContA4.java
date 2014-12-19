@@ -1,7 +1,13 @@
 package View;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import javax.swing.*;
@@ -17,27 +23,23 @@ public class ContA4 {
 	JLabel[] encodedAlphabet = a4.getEncodedAlphabet();
 	JLabel[] encodedPercentage = a4.getEncodedPercentage();
 	String text = new Text().getTextFromFile("geheim2.txt");
-	StatElement[] german = BootCamp.german;
+	StatElement[] german =b.germanHashToSortedArray();
 	StatElement[] encoded = b.wordCount(text);
+	char selectedChar;
+	
 
 	ContA4() {
-		for(int i =0;i<26;i++){
-			System.out.println(german[i]);
-			System.out.println(encoded[i]);
-		}
-	
-		System.out.println("DONE");
+
 		setText();
 		setListener();
 	}
 
 	public void decode() {
-		a4.getText().setText("");
+		a4.getTextEncoded().setText("");
 		alphabet = a4.getAlphabet();
 		char[] charText = text.toCharArray();
 		for (int i = 0; i < charText.length; i++) {
 			for (int index = 0; index < 26; index++) {
-				// System.out.println((encoded[index].letter+"=="+charText[i])+" "+i+" "+index);
 				if (encoded[index].letter == charText[i]) {
 
 					charText[i] = (alphabet[index].getText().trim().charAt(0));
@@ -45,16 +47,14 @@ public class ContA4 {
 				}
 			}
 
-			a4.getText().append(String.format("%c", charText[i]));
+			a4.getTextEncoded().append(String.format("%c", charText[i]));
 		}
+		a4.getTextEncoded().append("\n");
 
 	}
 
 	public void setText() {
-		for (int i = 0; i < encoded.length; i++) {
-
-
-		}
+		a4.getTextDecoded().setText(text + "\n");
 		for (int i = 0; i < 26; i++) {
 			alphabet[i].setText(String.format("%c",
 					((StatElement) (german[i])).letter));
@@ -70,14 +70,130 @@ public class ContA4 {
 	}
 
 	public void setListener() {
-		JButton decode = a4.getDecode();
-		decode.addActionListener(new ActionListener() {
+		a4.getDecode().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				decode();
 			}
 		});
+		final JTextField[] t = a4.getAlphabet();
+		for (int i = 0; i < t.length; i++) {
+			 t[i].addKeyListener(new KeyListener(){
+
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void keyReleased(KeyEvent arg0) {
+					JTextField textfield = ((JTextField)arg0.getSource());
+					char c =textfield.getText().trim().toUpperCase().charAt(0);
+					
+					
+					
+					for (int i = 0; i < t.length; i++) {
+						System.out.println(t[i].getText().trim().charAt(0)+"=="+c);
+						if(t[i].getText().trim().toUpperCase().charAt(0)==c){
+							
+							a4.getPercentage()[i].setText(String.format("%.2f %%", BootCamp.germanWordFreq.get(c)));
+							if(german[i].letter==c){
+								textfield.setForeground(Color.YELLOW);
+								a4.getPercentage()[i].setForeground(Color.YELLOW);
+							}else{
+								textfield.setForeground(Color.orange);
+								a4.getPercentage()[i].setForeground(Color.orange);
+							}
+						}
+						
+					}
+					LinkedList<Integer> doppelt = new LinkedList<Integer>();
+					if(true){
+						for(int i=0;i<26;i++){
+							t[i].setForeground(Color.YELLOW);
+							for(int j =i+1;j<26;j++){
+								if(t[i].getText().trim().toUpperCase().charAt(0)==t[j].getText().trim().toUpperCase().charAt(0)){
+									doppelt.add(i);
+									doppelt.add(j);
+								}
+							}
+;						}
+					}
+					
+					for(int i :doppelt){
+						t[i].setForeground(Color.red);
+					}
+					
+				}
+
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					
+					
+				}
+				 
+			 });
+			 t[i].addMouseListener(new MouseListener(){
+
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					for (int i = 0; i < t.length; i++) {
+						String temp = ((JTextField)arg0.getSource()).getText().trim().toUpperCase();
+						if(temp.length()>0){
+							selectedChar = temp.charAt(0);
+						}
+					}
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				 
+			 });
+
+		}
+		a4.getSearch().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String search = a4.getCharSearch().getText().trim()
+						.toUpperCase();
+				if (search.length() > 0) {
+					StatElement[] se = b.countMaxBeforeAfter(
+							text.toCharArray(), a4.getCharSearch().getText()
+									.trim().toUpperCase().charAt(0), a4
+									.getToggleButton().isSelected());
+					for (int i = 0; i < 5; i++) {
+						a4.getCharStat().append(
+								String.format("%s\n", se[i].toString()));
+					}
+				}
+			}
+		});
+
 	}
 
 }

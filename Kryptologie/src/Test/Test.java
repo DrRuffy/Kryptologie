@@ -19,9 +19,7 @@ public class Test {
 		Text t = new Text();
 		BootCamp bo = new BootCamp();
 		
-		for (StatElement s : BootCamp.german){
-			System.out.println(s.letter+": "+s.percentage);
-		}
+		
 		
 		
 		
