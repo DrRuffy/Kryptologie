@@ -34,7 +34,7 @@ public class Vigenere {
 	 *            als char Array
 	 * @return Entschlüsseltertext als char Array
 	 */
-	public char[] entsch(char[] input, char[] key) {
+	public String entsch(char[] input, char[] key) {
 
 		char[] out = new char[input.length];
 		for (int i = 0; i < input.length; i++) {
@@ -44,7 +44,11 @@ public class Vigenere {
 															// addiere 26
 			out[i] = (char) (ascii);
 		}
-		return out;
+		String temp = "";
+		for(char c : out){
+			temp+=c;
+		}
+		return temp;
 	}
 
 }

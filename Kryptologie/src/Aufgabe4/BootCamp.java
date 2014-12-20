@@ -22,8 +22,41 @@ public class BootCamp {
 	};
 
 
-	 public static final HashMap<Character, Double> germanWordFreq;
+	 public static final char[] solve;
 	
+	 static {
+	 solve = new char[26];
+	 solve[0] = 'E';
+	 solve[1] = 'N';
+	 solve[2] = 'I';
+	 solve[3] = 'T';
+	 solve[4] = 'R';
+	 solve[5] = 'U';
+	 solve[6] = 'S';
+	 solve[7] = 'H';
+	 solve[8] = 'A';
+	 solve[9] = 'C';
+	 solve[10] = 'D';
+	 solve[11] = 'G';
+	 solve[12] = 'L';
+	 solve[13] = 'O';
+	 solve[14] = 'F';
+	 solve[15] = 'Z';
+	 solve[16] = 'M';
+	 solve[17] = 'W';
+	 solve[18] = 'K';
+	 solve[19] = 'B';
+	 solve[20] = 'P';
+	 solve[21] = 'V';
+	 solve[22] = 'Y';
+	 solve[23] = 'Q';
+	 solve[24] = 'J';
+	 solve[25] = 'X';
+	
+	 
+	 }
+	 public static final HashMap<Character, Double> germanWordFreq;
+		
 	 static {
 	 germanWordFreq = new HashMap<Character, Double>();
 	 germanWordFreq.put('E', 17.4);
@@ -53,7 +86,6 @@ public class BootCamp {
 	 germanWordFreq.put('X', 0.03);
 	 germanWordFreq.put('Q', 0.02);
 	 }
-
 	public StatElement[] wordCount(String encodedText) {
 		PriorityQueue<StatElement> temp = new PriorityQueue<StatElement>(c);
 		double[] statistic = new double[26];

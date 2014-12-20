@@ -9,12 +9,13 @@ public class KappaTest {
 	
 
 	// ------------------------------------------------------------------------
-	/**
-	 * 
-	 * @param filename
-	 * @throws IOException
-	 */
-	public char[] getKeyWord(String encodedText) throws IOException {
+/**
+ * 
+ * @param encodedText
+ * @return
+ * @throws IOException
+ */
+	public String getKeyWord(String encodedText) throws IOException {
 		
 
 		int keyLength = getKeyLength(encodedText);
@@ -32,14 +33,18 @@ public class KappaTest {
 			i++;
 
 		}
-		
-		return keyWord;
+		String temp="";
+		for (char c:keyWord){
+			temp+=c;
+		}
+		return temp;
 
 	}
 
 	// ------------------------------------------------------------------------
 	/**
 	 * 
+	 * @param encodedText
 	 * @return
 	 */
 	public int getKeyLength(String encodedText) {
@@ -63,6 +68,7 @@ public class KappaTest {
 	// ------------------------------------------------------------------------
 	/**
 	 * 
+	 * @param encodedText
 	 * @param keysize
 	 * @return
 	 */

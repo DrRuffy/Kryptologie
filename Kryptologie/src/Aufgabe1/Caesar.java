@@ -8,46 +8,37 @@ public class Caesar {
 	private Text text = new Text();
 	char[] alphabet = text.getAlphabet();
 
-	private char letter;
-	private char[] word;
-	HashMap<Character, Character> encodeMap = new HashMap<Character, Character>();
-
 	// ------------------------------------------------------------------------
 	/**
-	 * über die kosole werden schlüsselwort, startbuchstabe und der zu
-	 * verschlüsselnde text eingegeben und anschließend verschlüsselt
 	 * 
-	 * @return Verschlüsselter Text als Characterarray
+	 * @param text
+	 * @param word
+	 * @param letter
+	 * @return
 	 */
-	public char[] encode() {
-		getKeyword();
-		getKeyLetter();
-		generateEncodeMap();
-		System.out.println("Geben Sie den zu verschlüsselnden Text ein:");
+	public String encode(String text, String word, char letter) {
+		HashMap<Character, Character> encodeMap = swapMap(generateEncodeMap(
+				word, letter));
 		String temp = "";
-
-		for (char c : text.getText().toCharArray()) {
+		for (char c : text.toCharArray()) {
 			temp += Character.toString(encodeMap.get(c));
 		}
-		System.out.println("encode: " + temp);
-		return temp.toCharArray();
+		return temp;
 	}
 
 	// ------------------------------------------------------------------------
 	/**
-	 * vertauscht ind einer hashmap die keys mit ihren jeweiligen values
 	 * 
 	 * @param map
-	 *            in der die key und values vertauscht werden sollen
-	 * @return Map mit dn vertauschten Key-Values
+	 * @return
 	 */
 	public HashMap<Character, Character> swapMap(
 			HashMap<Character, Character> map) {
-		
+
 		HashMap<Character, Character> neu = new HashMap<Character, Character>();
-		
+
 		for (int i = 0; i < map.size(); i++) {
-			
+
 			neu.put(map.get(alphabet[i]), alphabet[i]);
 		}
 		return neu;
@@ -55,62 +46,21 @@ public class Caesar {
 
 	// ------------------------------------------------------------------------
 	/**
-	 * entschlüsselt den zuvor verschlüsselten Text
 	 * 
-	 * @param encode
-	 *            der zu entschlüsselnde text als Characterarray
-	 * @return der entschlüsselte Text
+	 * @param text
+	 * @param word
+	 * @param letter
+	 * @return
 	 */
-	public char[] decode(char[] encode) {
+	public String decode(String text, String word, char letter) {
 		String decode = "";
-		HashMap<Character, Character> decodeMap = swapMap(encodeMap);
-		for (char c : encode) {
+		HashMap<Character, Character> decodeMap = generateEncodeMap(word,
+				letter);
+		for (char c : text.toCharArray()) {
 			decode += Character.toString(decodeMap.get(c));
 		}
 		System.out.println("decode: " + decode);
-		return decode.toCharArray();
-	}
-
-	// ------------------------------------------------------------------------
-	/**
-	 * fordert eine eingabe des schlüsselworts über die system.in ein
-	 */
-	public void getKeyword() {
-		System.out.print("Bitte geben Sie das Schlüsselwort ein: ");
-		word = text.deleteDuplicates(text.getText()).toCharArray();
-		String temp = "";
-		for (char c : word) {
-			temp += Character.toString(c);
-		}
-		System.out.println("Schlüsselwort: " + temp);
-	}
-
-	// ------------------------------------------------------------------------
-	/**
-	 * fordert den schlüsselbuchstaben über die system.in ein
-	 */
-	public void getKeyLetter() {
-		System.out.print("Geben Sie nun den Schlüsselbuchstaben ein: ");
-		String keyLetter = text.getText();
-
-		letter = keyLetter.charAt(0);
-
-	}
-
-	// ------------------------------------------------------------------------
-	/**
-	 * holt sich aus dem alphabets den index des zuvor eingegebenen
-	 * schlüsselbuchstabens
-	 * 
-	 * @return den index des gewählten buchstabens im array
-	 */
-	public int getAlphabetKeyLetterIndex() {
-		for (int i = 0; i < alphabet.length; i++) {
-			if (alphabet[i] == letter) {
-				return i;
-			}
-		}
-		return -1;
+		return decode;
 	}
 
 	// ------------------------------------------------------------------------
@@ -133,25 +83,29 @@ public class Caesar {
 
 	// ------------------------------------------------------------------------
 	/**
-	 * generiert mithilfe des schlüsselwortes, des schlüsselbuchstabens und des
-	 * alphabets die zeichentabelle
+	 * 
+	 * @param word
+	 * @param letter
+	 * @return
 	 */
-	public void generateEncodeMap() {
-
-		int startIndex = getAlphabetKeyLetterIndex();
+	public HashMap<Character, Character> generateEncodeMap(String word,
+			char letter) {
+		HashMap<Character, Character> map = new HashMap<Character, Character>();
+		int startIndex = ((int) letter) - 65;
 		int index = 0;
 
-		for (int i = 0; i < word.length; i++) {
-			encodeMap
-					.put(word[i], alphabet[(i + startIndex) % alphabet.length]);
+		for (int i = 0; i < word.length(); i++) {
+			map.put(word.charAt(i),
+					alphabet[(i + startIndex) % alphabet.length]);
 		}
 		for (char c : alphabet) {
-			if (!charInArray(c, word)) {
-				encodeMap.put(c, alphabet[(index++ + startIndex + word.length)
+			if (!charInArray(c, word.toCharArray())) {
+				map.put(c, alphabet[(index++ + startIndex + word.length())
 						% alphabet.length]);
 			}
 		}
-		encodeMap = swapMap(encodeMap);
+		return map;
 
 	}
+
 }

@@ -3,6 +3,13 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -23,26 +30,28 @@ public class ContA4 {
 	JLabel[] encodedAlphabet = a4.getEncodedAlphabet();
 	JLabel[] encodedPercentage = a4.getEncodedPercentage();
 	String text = new Text().getTextFromFile("geheim2.txt");
-	StatElement[] german =b.germanHashToSortedArray();
+	StatElement[] german = b.germanHashToSortedArray();
 	StatElement[] encoded = b.wordCount(text);
 	char selectedChar;
-	
+	char[] mySolution;
 
 	ContA4() {
 
 		setText();
 		setListener();
 	}
-
+/**
+ * 
+ */
 	public void decode() {
 		a4.getTextEncoded().setText("");
 		alphabet = a4.getAlphabet();
 		char[] charText = text.toCharArray();
+		
 		for (int i = 0; i < charText.length; i++) {
 			for (int index = 0; index < 26; index++) {
 				if (encoded[index].letter == charText[i]) {
-
-					charText[i] = (alphabet[index].getText().trim().charAt(0));
+					charText[i] = (alphabet[index].getText().trim().toUpperCase().charAt(0));
 					break;
 				}
 			}
@@ -52,7 +61,9 @@ public class ContA4 {
 		a4.getTextEncoded().append("\n");
 
 	}
-
+/**
+ * 
+ */
 	public void setText() {
 		a4.getTextDecoded().setText(text + "\n");
 		for (int i = 0; i < 26; i++) {
@@ -68,8 +79,65 @@ public class ContA4 {
 
 		}
 	}
-
+/**
+ * 
+ */
 	public void setListener() {
+		a4.getSolveEncodedText().addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (mySolution == null) {
+					mySolution = new char[26];
+				}
+				if (!a4.getSolveEncodedText().isSelected()) {
+					for (int i = 0; i < BootCamp.solve.length; i++) {
+						String temp = a4.getAlphabet()[i].getText().trim()
+								.toUpperCase();
+						if (temp.length() > 0)
+							mySolution[i] = temp.charAt(0);
+						// a4.getAlphabet()[i].setForeground(Color.green);
+					}
+
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (a4.getSolveEncodedText().isSelected()) {
+					for (int i = 0; i < BootCamp.solve.length; i++) {
+						a4.getAlphabet()[i].setText(String.format("%c",
+								BootCamp.solve[i]));
+					}
+				} else {
+					if (mySolution != null) {
+						for (int i = 0; i < BootCamp.solve.length; i++) {
+							a4.getAlphabet()[i].setText(String.format("%c",
+									mySolution[i]));
+						}
+					}
+				}
+			}
+
+		});
 		a4.getDecode().addActionListener(new ActionListener() {
 
 			@Override
@@ -77,102 +145,108 @@ public class ContA4 {
 				decode();
 			}
 		});
+
 		final JTextField[] t = a4.getAlphabet();
 		for (int i = 0; i < t.length; i++) {
-			 t[i].addKeyListener(new KeyListener(){
+			t[i].addKeyListener(new KeyListener() {
 
 				@Override
 				public void keyPressed(KeyEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
 				public void keyReleased(KeyEvent arg0) {
-					JTextField textfield = ((JTextField)arg0.getSource());
-					char c =textfield.getText().trim().toUpperCase().charAt(0);
-					
-					
-					
+					JTextField textfield = ((JTextField) arg0.getSource());
+					char c = textfield.getText().trim().toUpperCase().charAt(0);
+
 					for (int i = 0; i < t.length; i++) {
-						System.out.println(t[i].getText().trim().charAt(0)+"=="+c);
-						if(t[i].getText().trim().toUpperCase().charAt(0)==c){
-							
-							a4.getPercentage()[i].setText(String.format("%.2f %%", BootCamp.germanWordFreq.get(c)));
-							if(german[i].letter==c){
+
+						if (t[i].getText().trim().toUpperCase().charAt(0) == c) {
+
+							a4.getPercentage()[i].setText(String.format(
+									"%.2f %%", BootCamp.germanWordFreq.get(c)));
+
+							  if (german[i].letter == c) {
 								textfield.setForeground(Color.YELLOW);
-								a4.getPercentage()[i].setForeground(Color.YELLOW);
-							}else{
+								a4.getPercentage()[i]
+										.setForeground(Color.YELLOW);
+
+							} else {
 								textfield.setForeground(Color.orange);
-								a4.getPercentage()[i].setForeground(Color.orange);
+								a4.getPercentage()[i]
+										.setForeground(Color.orange);
 							}
 						}
 						
 					}
 					LinkedList<Integer> doppelt = new LinkedList<Integer>();
-					if(true){
-						for(int i=0;i<26;i++){
+					if (true) {
+						for (int i = 0; i < 26; i++) {
 							t[i].setForeground(Color.YELLOW);
-							for(int j =i+1;j<26;j++){
-								if(t[i].getText().trim().toUpperCase().charAt(0)==t[j].getText().trim().toUpperCase().charAt(0)){
+							for (int j = i + 1; j < 26; j++) {
+								if (t[i].getText().trim().toUpperCase()
+										.charAt(0) == t[j].getText().trim()
+										.toUpperCase().charAt(0)) {
 									doppelt.add(i);
 									doppelt.add(j);
 								}
 							}
-;						}
+							;
+						}
 					}
-					
-					for(int i :doppelt){
+
+					for (int i : doppelt) {
 						t[i].setForeground(Color.red);
 					}
-					
+
 				}
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
-					
-					
+
 				}
-				 
-			 });
-			 t[i].addMouseListener(new MouseListener(){
+
+			});
+			t[i].addMouseListener(new MouseListener() {
 
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					
-					
+
 				}
 
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
 				public void mouseExited(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 					for (int i = 0; i < t.length; i++) {
-						String temp = ((JTextField)arg0.getSource()).getText().trim().toUpperCase();
-						if(temp.length()>0){
+						String temp = ((JTextField) arg0.getSource()).getText()
+								.trim().toUpperCase();
+						if (temp.length() > 0) {
 							selectedChar = temp.charAt(0);
 						}
 					}
-					
+
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					
+
 				}
-				 
-			 });
+
+			});
 
 		}
 		a4.getSearch().addActionListener(new ActionListener() {

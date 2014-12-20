@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,6 +36,7 @@ public class Aufgabe4 extends JFrame {
 	private JButton decode, search;
 	private JLabel t1, t2, t3;
 	private JToggleButton toggleButton;
+	private JCheckBox solveEncodedText;
 
 	/**
 	 * Launch the application.
@@ -50,13 +53,11 @@ public class Aufgabe4 extends JFrame {
 	public Aufgabe4() {
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		width = (int) (d.width * 0.5);
-		height = (int) (d.height * 0.5);
+		width = (int) (d.width * 0.75);
+		height = (int) (d.height * 0.75);
 
-		// width = 800;
-		// height = 600;
 		setGerman();
-		
+		setSolve();
 		setEncoded();
 		setText();
 		setDecodeButton();
@@ -64,7 +65,7 @@ public class Aufgabe4 extends JFrame {
 		this.setResizable(true);
 		this.setTitle("Kryptologie - Aufgabe 4");
 		this.getContentPane().setBackground(Color.DARK_GRAY);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.setSize(width, height);
 
@@ -84,27 +85,36 @@ public class Aufgabe4 extends JFrame {
 
 	}
 
+	public void setSolve() {
+		solveEncodedText = new JCheckBox("Solve Encoded Text");
+		solveEncodedText.setBorderPainted(false);
+		solveEncodedText.setBackground(Color.DARK_GRAY);
+		solveEncodedText.setForeground(Color.LIGHT_GRAY);
+		solveEncodedText.setBorderPainted(false);
+		getContentPane().add(solveEncodedText);
+	}
+
 	public void setSearch() {
-		search = new JButton();
+		search = new JButton("SEARCH");
 		search.setBorderPainted(false);
 		search.setBackground(Color.LIGHT_GRAY);
 		search.setForeground(Color.DARK_GRAY);
-		search.setText("SEARCH");
+		search.setBorderPainted(false);
 		getContentPane().add(search);
 
-		toggleButton = new JToggleButton();
+		toggleButton = new JToggleButton("Search After");
 		toggleButton.setForeground(Color.LIGHT_GRAY);
 		toggleButton.setBackground(Color.GRAY);
-		toggleButton.setText("Search After");
+		toggleButton.setBorderPainted(false);
 		toggleButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(toggleButton.isSelected()){
+				if (toggleButton.isSelected()) {
 					toggleButton.setBackground(Color.LIGHT_GRAY);
 					toggleButton.setForeground(Color.GRAY);
 					toggleButton.setText("Search Before");
-				}else{
+				} else {
 					toggleButton.setForeground(Color.LIGHT_GRAY);
 					toggleButton.setBackground(Color.GRAY);
 					toggleButton.setText("Search After");
@@ -112,16 +122,23 @@ public class Aufgabe4 extends JFrame {
 			}
 		});
 		getContentPane().add(toggleButton);
-		
+
 		charSearch = new JTextField();
 		charSearch.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(charSearch);
-		
-		
+
 		charStat = new TextArea();
 		charStat.setBackground(Color.LIGHT_GRAY);
 		charStat.setForeground(Color.DARK_GRAY);
 		getContentPane().add(charStat);
+	}
+
+	public JCheckBox getSolveEncodedText() {
+		return solveEncodedText;
+	}
+
+	public void setSolveEncodedText(JCheckBox solveEncodedText) {
+		this.solveEncodedText = solveEncodedText;
 	}
 
 	public JButton getSearch() {
@@ -143,7 +160,7 @@ public class Aufgabe4 extends JFrame {
 	public void setJLabelAlphabet() {
 		alphabet = new JTextField[26];
 		for (int i = 0; i < alphabet.length; i++) {
-			
+
 		}
 	}
 
@@ -156,11 +173,11 @@ public class Aufgabe4 extends JFrame {
 		textEncoded.setBackground(Color.LIGHT_GRAY);
 		textEncoded.setForeground(Color.DARK_GRAY);
 		getContentPane().add(textEncoded);
-		t1 = new JLabel("Decoded Text:");
+		t1 = new JLabel("Encoded Text:");
 		t1.setBackground(Color.GRAY);
 		t1.setForeground(Color.LIGHT_GRAY);
 		getContentPane().add(t1);
-		t2 = new JLabel("Encoded Text:");
+		t2 = new JLabel("Decoded Text:");
 		t2.setBackground(Color.GRAY);
 		t2.setForeground(Color.LIGHT_GRAY);
 		getContentPane().add(t2);
@@ -176,8 +193,8 @@ public class Aufgabe4 extends JFrame {
 		decode.setBackground(Color.LIGHT_GRAY);
 		decode.setForeground(Color.DARK_GRAY);
 		decode.setText("DECODE");
-
 		this.getContentPane().add(decode);
+
 
 	}
 
@@ -216,12 +233,12 @@ public class Aufgabe4 extends JFrame {
 	public void setGerman() {
 		percentage = new JLabel[26];
 		alphabet = new JTextField[26];
-		for (int i = 0; i < alphabet.length; i++) {	
+		for (int i = 0; i < alphabet.length; i++) {
 			alphabet[i] = new JTextField();
 			alphabet[i].setBackground(Color.DARK_GRAY);
 			alphabet[i].setForeground(Color.YELLOW);
 			getContentPane().add(alphabet[i]);
-			
+
 			percentage[i] = new JLabel();
 			percentage[i].setBackground(Color.DARK_GRAY);
 			percentage[i].setForeground(Color.YELLOW);
@@ -230,14 +247,14 @@ public class Aufgabe4 extends JFrame {
 	}
 
 	public void setEncoded() {
-		encodedPercentage= new JLabel[26];
+		encodedPercentage = new JLabel[26];
 		encodedAlphabet = new JLabel[26];
 		for (int i = 0; i < encodedAlphabet.length; i++) {
 			encodedAlphabet[i] = new JLabel();
 			encodedAlphabet[i].setBackground(Color.DARK_GRAY);
 			encodedAlphabet[i].setForeground(Color.LIGHT_GRAY);
 			getContentPane().add(encodedAlphabet[i]);
-			
+
 			encodedPercentage[i] = new JLabel();
 			encodedPercentage[i].setBackground(Color.DARK_GRAY);
 			encodedPercentage[i].setForeground(Color.LIGHT_GRAY);
@@ -245,12 +262,11 @@ public class Aufgabe4 extends JFrame {
 		}
 	}
 
-
 	public void resize() {
 		for (int i = 0; i < alphabet.length; i++) {
 			// ----------------------------------------------------------------
 			alphabet[i].setFont(new Font("Times New Roman", Font.BOLD,
-					(int) (getHeight() * factor)));
+					(int) (getHeight() * factor * 0.75)));
 			alphabet[i].setBounds((int) (getWidth() * 0.01), (int) (i
 					* getHeight() * factor + getHeight() * spaceHead),
 					(int) (getWidth() * factor), (int) (getHeight() * factor));
@@ -324,15 +340,21 @@ public class Aufgabe4 extends JFrame {
 		// -----------------------------------------------------------------
 		search.setFont(new Font("Times New Roman", Font.BOLD,
 				(int) (getHeight() * factor)));
-		search.setBounds((int) (getWidth() * 0.3),
-				(int) (getHeight() * 0.1), (int) (getWidth() * 0.15),
-				(int) (getHeight() * factor));
+		search.setBounds((int) (getWidth() * 0.3), (int) (getHeight() * 0.1),
+				(int) (getWidth() * 0.15), (int) (getHeight() * factor));
 		// -----------------------------------------------------------------
 		charStat.setFont(new Font("Times New Roman", Font.BOLD,
 				(int) (getHeight() * factor)));
 		charStat.setBounds((int) (getWidth() * 0.5),
 				(int) (getHeight() * spaceHead), (int) (getWidth() * 0.47),
 				(int) (getHeight() * 0.25));
+		// ----------------------------------------------------------------
+		solveEncodedText.setFont(new Font("Times New Roman", Font.BOLD,
+				(int) (getHeight() * factor * 0.75)));
+		solveEncodedText.setBounds((int) (getWidth() * 0.3),
+				(int) (getHeight() * 0.4), (int) (getWidth() * (0.3)),
+				(int) (getHeight() * factor * 0.75));
+	
 	}
 
 	public TextArea getCharStat() {
