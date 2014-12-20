@@ -34,7 +34,7 @@ public class Aufgabe4 extends JFrame {
 	private TextArea textDecoded, textEncoded, charStat;
 	private JTextField charSearch;
 	private JButton decode, search;
-	private JLabel t1, t2, t3;
+	private JLabel t1, t2, t3, c;
 	private JToggleButton toggleButton;
 	private JCheckBox solveEncodedText;
 
@@ -55,7 +55,7 @@ public class Aufgabe4 extends JFrame {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		width = (int) (d.width * 0.75);
 		height = (int) (d.height * 0.75);
-
+		this.setSize(width, height);
 		setGerman();
 		setSolve();
 		setEncoded();
@@ -66,8 +66,6 @@ public class Aufgabe4 extends JFrame {
 		this.setTitle("Kryptologie - Aufgabe 4");
 		this.getContentPane().setBackground(Color.DARK_GRAY);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		this.setSize(width, height);
 
 		this.setLocationRelativeTo(null);
 
@@ -85,6 +83,9 @@ public class Aufgabe4 extends JFrame {
 
 	}
 
+	/**
+ * 
+ */
 	public void setSolve() {
 		solveEncodedText = new JCheckBox("Solve Encoded Text");
 		solveEncodedText.setBorderPainted(false);
@@ -94,6 +95,9 @@ public class Aufgabe4 extends JFrame {
 		getContentPane().add(solveEncodedText);
 	}
 
+	/**
+ * 
+ */
 	public void setSearch() {
 		search = new JButton("SEARCH");
 		search.setBorderPainted(false);
@@ -164,6 +168,9 @@ public class Aufgabe4 extends JFrame {
 		}
 	}
 
+	/**
+ * 
+ */
 	public void setText() {
 		textDecoded = new TextArea();
 		textDecoded.setBackground(Color.LIGHT_GRAY);
@@ -185,8 +192,15 @@ public class Aufgabe4 extends JFrame {
 		t3.setBackground(Color.GRAY);
 		t3.setForeground(Color.LIGHT_GRAY);
 		getContentPane().add(t3);
+		c = new JLabel("(c) Artur Gruber, Eike Petersen, Patrick Strehlke");
+		c.setBackground(Color.GRAY);
+		c.setForeground(Color.LIGHT_GRAY);
+		getContentPane().add(c);
 	}
 
+	/**
+ * 
+ */
 	public void setDecodeButton() {
 		decode = new JButton();
 		decode.setBorderPainted(false);
@@ -194,7 +208,6 @@ public class Aufgabe4 extends JFrame {
 		decode.setForeground(Color.DARK_GRAY);
 		decode.setText("DECODE");
 		this.getContentPane().add(decode);
-
 
 	}
 
@@ -230,6 +243,9 @@ public class Aufgabe4 extends JFrame {
 		this.encodedPercentage = encodedPercentage;
 	}
 
+	/**
+ * 
+ */
 	public void setGerman() {
 		percentage = new JLabel[26];
 		alphabet = new JTextField[26];
@@ -246,6 +262,9 @@ public class Aufgabe4 extends JFrame {
 		}
 	}
 
+	/**
+ * 
+ */
 	public void setEncoded() {
 		encodedPercentage = new JLabel[26];
 		encodedAlphabet = new JLabel[26];
@@ -262,6 +281,9 @@ public class Aufgabe4 extends JFrame {
 		}
 	}
 
+	/**
+ * 
+ */
 	public void resize() {
 		for (int i = 0; i < alphabet.length; i++) {
 			// ----------------------------------------------------------------
@@ -354,7 +376,12 @@ public class Aufgabe4 extends JFrame {
 		solveEncodedText.setBounds((int) (getWidth() * 0.3),
 				(int) (getHeight() * 0.4), (int) (getWidth() * (0.3)),
 				(int) (getHeight() * factor * 0.75));
-	
+		// ----------------------------------------------------------------
+		c.setFont(new Font("Times New Roman", Font.BOLD,
+				(int) (getHeight() * 0.02)));
+		c.setBounds((int) (getWidth() * 0.75), (int) (getHeight() * 0.925),
+				(int) (getWidth() * (0.4)), (int) (getHeight() * (0.02)));
+
 	}
 
 	public TextArea getCharStat() {

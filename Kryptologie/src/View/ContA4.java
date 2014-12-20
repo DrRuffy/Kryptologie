@@ -24,7 +24,7 @@ import Input.Text;
 
 public class ContA4 {
 	Aufgabe4 a4 = new Aufgabe4();
-	BootCamp b = new BootCamp();
+	Handarbeit b = new Handarbeit();
 	JTextField[] alphabet = a4.getAlphabet();
 	JLabel[] percentage = a4.getPercentage();
 	JLabel[] encodedAlphabet = a4.getEncodedAlphabet();
@@ -109,7 +109,7 @@ public class ContA4 {
 					mySolution = new char[26];
 				}
 				if (!a4.getSolveEncodedText().isSelected()) {
-					for (int i = 0; i < BootCamp.solve.length; i++) {
+					for (int i = 0; i < Handarbeit.solve.length; i++) {
 						String temp = a4.getAlphabet()[i].getText().trim()
 								.toUpperCase();
 						if (temp.length() > 0)
@@ -123,13 +123,13 @@ public class ContA4 {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (a4.getSolveEncodedText().isSelected()) {
-					for (int i = 0; i < BootCamp.solve.length; i++) {
+					for (int i = 0; i < Handarbeit.solve.length; i++) {
 						a4.getAlphabet()[i].setText(String.format("%c",
-								BootCamp.solve[i]));
+								Handarbeit.solve[i]));
 					}
 				} else {
 					if (mySolution != null) {
-						for (int i = 0; i < BootCamp.solve.length; i++) {
+						for (int i = 0; i < Handarbeit.solve.length; i++) {
 							a4.getAlphabet()[i].setText(String.format("%c",
 									mySolution[i]));
 						}
@@ -166,7 +166,7 @@ public class ContA4 {
 						if (t[i].getText().trim().toUpperCase().charAt(0) == c) {
 
 							a4.getPercentage()[i].setText(String.format(
-									"%.2f %%", BootCamp.germanWordFreq.get(c)));
+									"%.2f %%", Handarbeit.germanWordFreq.get(c)));
 
 							  if (german[i].letter == c) {
 								textfield.setForeground(Color.YELLOW);

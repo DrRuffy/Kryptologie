@@ -11,10 +11,10 @@ public class Caesar {
 	// ------------------------------------------------------------------------
 	/**
 	 * 
-	 * @param text
-	 * @param word
-	 * @param letter
-	 * @return
+	 * @param text - Der zu verschlüsselnde Quelltext
+	 * @param word - Das Schlüsselwort
+	 * @param letter - Der Startbuchstabe
+	 * @return Verschlüsselter Text als String
 	 */
 	public String encode(String text, String word, char letter) {
 		HashMap<Character, Character> encodeMap = swapMap(generateEncodeMap(
@@ -93,7 +93,7 @@ public class Caesar {
 		HashMap<Character, Character> map = new HashMap<Character, Character>();
 		int startIndex = ((int) letter) - 65;
 		int index = 0;
-
+		word= text.deleteDuplicates(word);
 		for (int i = 0; i < word.length(); i++) {
 			map.put(word.charAt(i),
 					alphabet[(i + startIndex) % alphabet.length]);

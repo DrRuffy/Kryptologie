@@ -2,34 +2,40 @@ package View;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class Luncher extends JFrame {
+public class Launcher extends JFrame {
 
 
 	private JButton btnAufgabe1_3 = new JButton();
 	private JButton btnAufgabe4 = new JButton();
+	private JLabel t3;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 
-		Luncher frame = new Luncher();
+		Launcher frame = new Launcher();
 
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Luncher() {
+	public Launcher() {
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (d.width *0.3);
@@ -37,7 +43,7 @@ public class Luncher extends JFrame {
 
 
 		this.setResizable(true);
-		this.setTitle("Kryptologie)");
+		this.setTitle("Kryptologie");
 		this.getContentPane().setBackground(Color.DARK_GRAY);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -47,8 +53,13 @@ public class Luncher extends JFrame {
 		addButton(btnAufgabe4);
 
 		btnAufgabe1_3.setText("Zur Aufgabe 1-3");
-		
 		btnAufgabe4.setText("Zur Aufgabe 4");
+		
+		t3 = new JLabel("(c) Artur Gruber, Eike Petersen, Patrick Strehlke");
+		t3.setBackground(Color.LIGHT_GRAY);
+		t3.setForeground(Color.LIGHT_GRAY);
+		getContentPane().add(t3);
+		
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent evt) {
 
@@ -61,6 +72,11 @@ public class Luncher extends JFrame {
 						(int) (getHeight() * 0.5), (int) (getWidth() * 0.8),
 						(int) (getHeight() * 0.15));
 				setButtonTextSize();
+				// ----------------------------------------------------------------
+				t3.setFont(new Font("Times New Roman", Font.BOLD, (int) (getHeight()
+						* 0.03)));
+				t3.setBounds((int) (getWidth() * 0.6), (int) (getHeight() * 0.8),
+						(int) (getWidth() * (0.4)), (int) (getHeight() * (0.03)));
 			}
 		});
 
@@ -69,7 +85,10 @@ public class Luncher extends JFrame {
 		this.setVisible(true);
 
 	}
-
+/**
+ * 
+ * @param button
+ */
 	public void addButton(JButton button) {
 
 		button.setBorderPainted(false);
@@ -93,7 +112,9 @@ public class Luncher extends JFrame {
 		});
 		this.getContentPane().add(button);
 	}
-
+/**
+ * 
+ */
 	public void setButtonTextSize() {
 		int size = (int) (getHeight() * 0.075);
 		btnAufgabe1_3.setFont(new Font("Times New Roman", Font.BOLD, size));

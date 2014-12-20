@@ -28,12 +28,10 @@ public class Aufgabe1_3 extends JFrame {
 	private JButton decode;
 	private JLabel t1, t2, t3, tw, tl, t6;
 
-
 	private JToggleButton toggleButton;
 	private String toggleText = "Decode";
 	private JComboBox<String> select;
 
-	
 	public JLabel getTw() {
 		return tw;
 	}
@@ -50,6 +48,9 @@ public class Aufgabe1_3 extends JFrame {
 		this.tl = tl;
 	}
 
+	/**
+ * 
+ */
 	public Aufgabe1_3() {
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -123,6 +124,9 @@ public class Aufgabe1_3 extends JFrame {
 		this.decode = decode;
 	}
 
+	/**
+ * 
+ */
 	public void setText() {
 		textDecoded = new TextArea();
 		textDecoded.setBackground(Color.LIGHT_GRAY);
@@ -166,11 +170,14 @@ public class Aufgabe1_3 extends JFrame {
 
 	}
 
+	/**
+ * 
+ */
 	public void setButton() {
 		select = new JComboBox<String>();
 
-		select.setModel(new DefaultComboBoxModel<String>(new String[] { "Aufgabe 1",
-				"Aufgabe 2", "Aufgabe 3" }));
+		select.setModel(new DefaultComboBoxModel<String>(new String[] {
+				"Aufgabe 1", "Aufgabe 2", "Aufgabe 3" }));
 		select.setForeground(Color.DARK_GRAY);
 		select.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(select);
@@ -213,6 +220,9 @@ public class Aufgabe1_3 extends JFrame {
 
 	}
 
+	/**
+ * 
+ */
 	public void resize() {
 		// ----------------------------------------------------------------
 		decode.setFont(new Font("Times New Roman", Font.BOLD,
