@@ -4,24 +4,23 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class KappaTest {
-	
-
-	
 
 	// ------------------------------------------------------------------------
-/**
- * 
- * @param encodedText
- * @return
- * @throws IOException
- */
+	/**
+	 * ermittelt über den häufugsten vorkommenden buchstaben in einem
+	 * deutschsprachen Text (E), das wahrscheinlichste Schlüsselwort
+	 * 
+	 * @param encodedText (String)
+	 *            - verschlüsselter Text
+	 * @return Schlüsselwort der Vigenereverschlüsselung als String
+	 * @throws IOException
+	 */
 	public String getKeyWord(String encodedText) throws IOException {
-		
 
 		int keyLength = getKeyLength(encodedText);
 		char[] keyWord = new char[keyLength];
 		int i = 0;
-		for (LinkedList<Character> c : splitText(encodedText,keyLength)) {
+		for (LinkedList<Character> c : splitText(encodedText, keyLength)) {
 
 			int charIndex = mostFreqLetter(countASCII(c));
 
@@ -33,32 +32,33 @@ public class KappaTest {
 			i++;
 
 		}
-		String temp="";
-		for (char c:keyWord){
-			temp+=c;
-		}
-		return temp;
+
+		return String.valueOf(keyWord);
 
 	}
 
 	// ------------------------------------------------------------------------
 	/**
+	 * Zählt die gleichen buchstabenpaare der verschobenen Listen und gibt den
+	 * index des ersten Maximums zurück
 	 * 
-	 * @param encodedText
-	 * @return
+	 * @param encodedText (String)
+	 *            - verschlüsselter Text
+	 * @return die wahrscheinliche Schlüsselwortlänge als int
 	 */
 	public int getKeyLength(String encodedText) {
 		int size = encodedText.length();
-		
-		for (int i = 0; i < size-1; i++) {
+
+		for (int i = 0; i < size - 1; i++) {
 			double anz = 0;
 			for (int ii = 0; ii < size; ii++) {
-				if (encodedText.charAt(ii) == encodedText.charAt((ii + 1 + i) % size)) {
+				if (encodedText.charAt(ii) == encodedText.charAt((ii + 1 + i)
+						% size)) {
 					anz++;
 				}
 			}
 			if ((anz / size) > 0.08) {
-				return i+1;
+				return i + 1;
 			}
 
 		}
@@ -67,10 +67,12 @@ public class KappaTest {
 
 	// ------------------------------------------------------------------------
 	/**
+	 * teilt den Text in keysize Listen auf, sodass jeder n-te buchstabe in
+	 * einer Liste ist
 	 * 
-	 * @param encodedText
-	 * @param keysize
-	 * @return
+	 * @param encodedText (String) - verschlüsselter Text
+	 * @param keysize (int) - länge des wahrscheilnichen Schlüsselworts
+	 * @return jeder n-te buchstabe ist ein einer Liste
 	 */
 	public LinkedList<Character>[] splitText(String encodedText, int keysize) {
 
@@ -87,11 +89,13 @@ public class KappaTest {
 
 	// ------------------------------------------------------------------------
 	/**
+	 * Zählt die häfigkeit der buchstaben in erner Liste und gibt das Ergebnis
+	 * als integerarray zurück
 	 * 
-	 * @param c_Arr
-	 * @return
+	 * @param c_Arr (LinkedList<Character>) 
+	 * @return Array mit buchstabenhäufigkeiten
 	 */
-	public static int[] countASCII(LinkedList<Character> c_Arr) {
+	public int[] countASCII(LinkedList<Character> c_Arr) {
 
 		int[] statistic = new int[26];
 		for (char c : c_Arr) {
@@ -103,11 +107,13 @@ public class KappaTest {
 
 	// ------------------------------------------------------------------------
 	/**
+	 * gibt die position des häfigsten Buchstaben aus
+	 * index +65 => char
 	 * 
 	 * @param anz
-	 * @return
+	 * @return position des größten elements
 	 */
-	public static int mostFreqLetter(int[] anz) {
+	public int mostFreqLetter(int[] anz) {
 		int max = 0;
 		int index = 0;
 		for (int i = 0; i < anz.length; i++) {

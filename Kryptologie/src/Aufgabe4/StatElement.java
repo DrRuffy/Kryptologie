@@ -5,6 +5,8 @@ public class StatElement {
 	public double percentage;
 
 	/**
+	 * StatElementObjekt in dem der Buchstabe und dessen prozentuale Häufugkeit
+	 * gespeichet wird
 	 * 
 	 * @param letter
 	 * @param percentage
@@ -14,9 +16,10 @@ public class StatElement {
 		this.percentage = percentage;
 	}
 
+	// ------------------------------------------------------------------------
 	/**
- * 
- */
+	 * toString Methode
+	 */
 	public String toString() {
 		return String.format("%c: %.2f %%", letter, percentage);
 	}

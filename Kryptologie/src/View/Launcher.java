@@ -97,7 +97,6 @@ public class Launcher extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(((JButton) e.getSource()).getText());
 				switch (((JButton) e.getSource()).getText()) {
 				case "Zur Aufgabe 1-3":
 					new ContA1_3();

@@ -40,30 +40,34 @@ public class ContA4 {
 		setText();
 		setListener();
 	}
-/**
+
+	/**
  * 
  */
 	public void decode() {
 		a4.getTextEncoded().setText("");
 		alphabet = a4.getAlphabet();
 		char[] charText = text.toCharArray();
-		
+
 		for (int i = 0; i < charText.length; i++) {
 			for (int index = 0; index < 26; index++) {
 				if (encoded[index].letter == charText[i]) {
-					charText[i] = (alphabet[index].getText().trim().toUpperCase().charAt(0));
+					charText[i] = (alphabet[index].getText().trim()
+							.toUpperCase().charAt(0));
 					break;
 				}
 			}
 
-			a4.getTextEncoded().append(String.format("%c", charText[i]));
+			
 		}
+		a4.getTextEncoded().setText(String.valueOf(charText));
 		a4.getTextEncoded().append("\n");
 
 	}
-/**
- * 
- */
+
+	/**
+	 * setzt in der View die Tabelle mit den Buchstaben und derer Häufigkeiten
+	 */
 	public void setText() {
 		a4.getTextDecoded().setText(text + "\n");
 		for (int i = 0; i < 26; i++) {
@@ -79,7 +83,8 @@ public class ContA4 {
 
 		}
 	}
-/**
+
+	/**
  * 
  */
 	public void setListener() {
@@ -168,7 +173,7 @@ public class ContA4 {
 							a4.getPercentage()[i].setText(String.format(
 									"%.2f %%", Handarbeit.germanWordFreq.get(c)));
 
-							  if (german[i].letter == c) {
+							if (german[i].letter == c) {
 								textfield.setForeground(Color.YELLOW);
 								a4.getPercentage()[i]
 										.setForeground(Color.YELLOW);
@@ -179,7 +184,7 @@ public class ContA4 {
 										.setForeground(Color.orange);
 							}
 						}
-						
+
 					}
 					LinkedList<Integer> doppelt = new LinkedList<Integer>();
 					if (true) {
@@ -260,7 +265,7 @@ public class ContA4 {
 							text.toCharArray(), a4.getCharSearch().getText()
 									.trim().toUpperCase().charAt(0), a4
 									.getToggleButton().isSelected());
-					for (int i = 0; i < 5; i++) {
+					for (int i = 0; i < se.length; i++) {
 						a4.getCharStat().append(
 								String.format("%s\n", se[i].toString()));
 					}

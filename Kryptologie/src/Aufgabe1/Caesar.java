@@ -68,7 +68,6 @@ public class Caesar {
 		for (char c : text.toCharArray()) {
 			decode += Character.toString(decodeMap.get(c));
 		}
-		System.out.println("decode: " + decode);
 		return decode;
 	}
 
@@ -92,7 +91,8 @@ public class Caesar {
 
 	// ------------------------------------------------------------------------
 	/**
-	 * generiert das Ver-/Entschlüsselungsalphabet
+	 * generiert das Ver-/Entschlüsselungsalphabet 
+	 * (Key = Klartextbuchstabe; Value = verschlüsselter Buchstabe)
 	 * 
 	 * @param word
 	 *            - Schlüsselwort
@@ -106,6 +106,7 @@ public class Caesar {
 		int startIndex = ((int) letter) - 65;
 		int index = 0;
 		word = text.deleteDuplicates(word);
+		
 		for (int i = 0; i < word.length(); i++) {
 			map.put(word.charAt(i),
 					alphabet[(i + startIndex) % alphabet.length]);
