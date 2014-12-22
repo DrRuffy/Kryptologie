@@ -86,22 +86,22 @@ public class Handarbeit {
 	}
 
 	/**
+	 * Zählt die Häufigkeit der Auftretenden Buchstaben des zu Entschlüsselnden
+	 * Textes
 	 * 
-	 * @param encodedText
-	 * @return
+	 * @param Verschlüsselter
+	 *            Input Text
+	 * @return Array aus Sortierten StatElement`s
 	 */
 	public StatElement[] wordCount(String encodedText) {
-		PriorityQueue<StatElement> temp = new PriorityQueue<StatElement>(c);
 		double[] statistic = new double[26];
-		int anz = 0;
 		for (char c : encodedText.toCharArray()) {
 			int tmp = ((int) c) - 65;
 
 			statistic[tmp]++;
-			anz++;
 		}
 
-		return sort(statistic, anz);
+		return sort(statistic, encodedText.length());
 	}
 
 	/**
@@ -124,10 +124,15 @@ public class Handarbeit {
 	}
 
 	/**
+	 * Sortiert die Häufigkeit der auftretenden Buchstaben mithilfe einer
+	 * PriorityQueue.
 	 * 
-	 * @param toSort
-	 * @param anz
-	 * @return
+	 * @param Array
+	 *            aus Doublewerten mit der Häufigkeit der Auftretenden
+	 *            Buchstaben
+	 * @param Anzahl
+	 *            der gezählten Buchstaben
+	 * @return Sortiertes Array aus StatElement`s
 	 */
 	public StatElement[] sort(double[] toSort, int anz) {
 		StatElement[] tempArray = new StatElement[toSort.length];
@@ -145,10 +150,13 @@ public class Handarbeit {
 	}
 
 	/**
+	 * Gibt ein Array aus sortierten StatElement`s zurück, welche die
+	 * Häufigkeiten der vorgehenden/nachfolgenden Buchstaben, des zu prüfenden
+	 * Buchstaben enthält.
 	 * 
-	 * @param text
-	 * @param ch
-	 * @param before
+	 * @param text (char[]) - des Eingabe Textes
+	 * @param ch (char)	- Buchstabe der geprüft wird
+	 * @param before (Boolean) - true= vorher, false= folgende
 	 * @return
 	 */
 	public StatElement[] countMaxBeforeAfter(char[] text, char ch,

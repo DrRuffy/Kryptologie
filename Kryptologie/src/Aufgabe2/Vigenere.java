@@ -7,7 +7,9 @@ public class Vigenere {
 	}
 
 	/**
-	 * Verschlüsselt mittels Vigenere
+	 * Verschlüsselt mittels Vigenere. Addiert den ascii Wert des
+	 * Schlüssenwortbuchstaben auf den jeweiligen Buchstaben des zu
+	 * verschlüsselden Textes.
 	 * 
 	 * @param Eingabetext
 	 *            als char Array
@@ -26,7 +28,10 @@ public class Vigenere {
 	}
 
 	/**
-	 * Entschlüsselt mittels Vigenere
+	 * Entschlüsselt mittels Vigenere.
+	 * Subtrahiert den ascii Wert des
+	 * Schlüssenwortbuchstaben von dem jeweiligen Buchstaben des zu
+	 * entschlüsselden Textes.
 	 * 
 	 * @param Eingabetext
 	 *            als char Array
