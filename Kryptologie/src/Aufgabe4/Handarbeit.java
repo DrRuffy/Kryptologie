@@ -127,11 +127,11 @@ public class Handarbeit {
 	 * Sortiert die Häufigkeit der auftretenden Buchstaben mithilfe einer
 	 * PriorityQueue.
 	 * 
-	 * @param Array
-	 *            aus Doublewerten mit der Häufigkeit der Auftretenden
-	 *            Buchstaben
-	 * @param Anzahl
-	 *            der gezählten Buchstaben
+	 * @param toSort
+	 *            (double[]) - Array aus Doublewerten mit der Häufigkeit der
+	 *            auftretenden Buchstaben
+	 * @param anz
+	 *            (int) - Anzahl der gezählten Buchstaben
 	 * @return Sortiertes Array aus StatElement`s
 	 */
 	public StatElement[] sort(double[] toSort, int anz) {
@@ -154,10 +154,13 @@ public class Handarbeit {
 	 * Häufigkeiten der vorgehenden/nachfolgenden Buchstaben, des zu prüfenden
 	 * Buchstaben enthält.
 	 * 
-	 * @param text (char[]) - des Eingabe Textes
-	 * @param ch (char)	- Buchstabe der geprüft wird
-	 * @param before (Boolean) - true= vorher, false= folgende
-	 * @return
+	 * @param text
+	 *            (char[]) - des Eingabe Textes
+	 * @param ch
+	 *            (char) - Buchstabe der geprüft wird
+	 * @param before
+	 *            (Boolean) - true= vorher, false= folgende
+	 * @return  Sortiertes Array aus StatElement`s 
 	 */
 	public StatElement[] countMaxBeforeAfter(char[] text, char ch,
 			boolean before) {
