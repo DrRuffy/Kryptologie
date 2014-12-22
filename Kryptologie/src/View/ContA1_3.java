@@ -23,7 +23,8 @@ public class ContA1_3 {
 		a1_3 = new Aufgabe1_3();
 		setListener();
 	}
-/**
+
+	/**
  * 
  */
 	public void setListener() {
@@ -99,28 +100,33 @@ public class ContA1_3 {
 									v.entsch(text.toCharArray(),
 											word.toCharArray()));
 						} else {
-							// verschl
+							a1_3.getTextEncoded().setText(v.versch(text.toCharArray(), word.toCharArray()));
 						}
 					}
 					break;
-					
+
 				case "Aufgabe 3":
-					
+
 					try {
 						text = t.getTextFromFile("geheim1.txt");
-						word =k.getKeyWord(text).toString();
+						word = k.getKeyWord(text).toString();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					a1_3.getTextDecoded().setText(text);
-					a1_3.getTextEncoded().setText("Keyword: "+word+"\n"+v.entsch(text.toCharArray(),word.toCharArray()));
+					a1_3.getTextEncoded().setText(
+							"Keyword: "
+									+ word
+									+ "\n"
+									+ v.entsch(text.toCharArray(),
+											word.toCharArray()));
 					break;
 				}
 
 			}
 
 		});
-		
+
 	}
 }

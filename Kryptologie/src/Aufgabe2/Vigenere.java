@@ -15,14 +15,14 @@ public class Vigenere {
 	 *            als char Array
 	 * @return Verschlüsseltertext als char Array
 	 */
-	public char[] swap(char[] input, char[] key) {
+	public String versch(char[] input, char[] key) {
 		char[] out = new char[input.length];
 		for (int x = 0; x < input.length; x++) {
 			int ascii = (input[x] + key[x % key.length]) % 26 + 65;
 			out[x] = (char) ascii;
 		}
 
-		return out;
+		return String.valueOf(out);
 	}
 
 	/**
@@ -44,11 +44,7 @@ public class Vigenere {
 															// addiere 26
 			out[i] = (char) (ascii);
 		}
-		String temp = "";
-		for(char c : out){
-			temp+=c;
-		}
-		return temp;
+		return String.valueOf(out);
 	}
 
 }
