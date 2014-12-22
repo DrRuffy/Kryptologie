@@ -308,7 +308,7 @@ public class Aufgabe1_3 extends JFrame {
 	public TextArea getTextEncoded() {
 		return textEncoded;
 	}
-
+ 
 	public void setTextEncoded(TextArea textEncoded) {
 		this.textEncoded = textEncoded;
 	}
