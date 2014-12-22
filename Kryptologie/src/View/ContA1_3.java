@@ -100,7 +100,9 @@ public class ContA1_3 {
 									v.entsch(text.toCharArray(),
 											word.toCharArray()));
 						} else {
-							a1_3.getTextEncoded().setText(v.versch(text.toCharArray(), word.toCharArray()));
+							a1_3.getTextEncoded().setText(
+									v.versch(text.toCharArray(),
+											word.toCharArray()));
 						}
 					}
 					break;
